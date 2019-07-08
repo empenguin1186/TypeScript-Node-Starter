@@ -69,10 +69,10 @@ https://developer.mozilla.org/ja/docs/Tools/Debugger/How_to/Use_a_source_map
 ```
 ls -l node_modules/@types/async/
 total 56
--rw-r--r--  1 kodaira  YAHOO\Domain Users   1183  6  5 05:54 LICENSE
--rw-r--r--  1 kodaira  YAHOO\Domain Users    757  6  5 05:54 README.md
--rw-r--r--  1 kodaira  YAHOO\Domain Users  15765  6  5 05:54 index.d.ts // これが型定義ファイル
--rw-r--r--  1 kodaira  YAHOO\Domain Users   2148  7  8 08:27 package.json
+-rw-r--r--  1 ...   1183  6  5 05:54 LICENSE
+-rw-r--r--  1 ...    757  6  5 05:54 README.md
+-rw-r--r--  1 ...  15765  6  5 05:54 index.d.ts // これが型定義ファイル
+-rw-r--r--  1 ...   2148  7  8 08:27 package.json
 ```
 
 ### What if a library isn't on DefinitelyTyped?
