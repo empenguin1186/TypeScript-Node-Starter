@@ -5,7 +5,7 @@
 ### Project Structure
 
 ファイル構成は以下の通り
-```
+```Shell
 $ pwd
 <local-path>/TypeScript-Node-Starter
 $ ls
@@ -27,7 +27,7 @@ https://developer.mozilla.org/ja/docs/Tools/Debugger/How_to/Use_a_source_map
 ### Running the build
 ビルドコマンドは`npm`コマンドを使用する。なお、package.jsonの`script`タグで実行するビルドコマンドのエイリアスを設定することが可能。
 
-```:JSON
+```JSON
 "scripts": {
     "start": "npm run serve",
     "build": "npm run build-sass && npm run build-ts && npm run tslint && npm run copy-static-assets",
@@ -55,7 +55,7 @@ https://developer.mozilla.org/ja/docs/Tools/Debugger/How_to/Use_a_source_map
 型定義ファイル。型定義がされていないjsファイルを使用する時に用いられる。
 外部ライブラリの型定義は ./package.json の`devDependencies`フィールドで指定することができる
 
-```:JSON
+```JSON
 "devDependencies": {
     "@types/async": "^3.0.0",
     "@types/bcrypt-nodejs": "^0.0.30",
@@ -66,7 +66,7 @@ https://developer.mozilla.org/ja/docs/Tools/Debugger/How_to/Use_a_source_map
 `npm install`を実行すると型定義ファイルは `./node_modules/@types` 配下に配置される
 
 例
-```
+```Shell
 ls -l node_modules/@types/async/
 total 56
 -rw-r--r--  1 ...   1183  6  5 05:54 LICENSE
@@ -75,8 +75,89 @@ total 56
 -rw-r--r--  1 ...   2148  7  8 08:27 package.json
 ```
 
-### What if a library isn't on DefinitelyTyped?
+node_modules/@types/async/index.d.ts の内容
+```TypeScript
+...
+export interface AsyncQueue<T> {
+    length(): number;
+    started: boolean;
+    running(): number;
+    idle(): boolean;
+    concurrency: number;
+    push<R, E = Error>(task: T | T[], callback?: AsyncResultCallback<R, E>): void;
+    unshift<E = Error>(task: T | T[], callback?: ErrorCallback<E>): void;
+    remove(filter: (node: DataContainer<T>) => boolean): void;
 
+    saturated(): Promise<void>;
+    saturated(handler: () => void): void ;
+    empty(): Promise<void>;
+    empty(handler: () => void): void;
+    drain(): Promise<void>;
+    drain(handler: () => void): void;
+
+    paused: boolean;
+    pause(): void;
+    resume(): void;
+    kill(): void;
+    workersList<TWorker extends DataContainer<T>, CallbackContainer>(): TWorker[];
+    error(error: Error, data: any): void;
+    unsaturated(): void;
+    buffer: number;
+}
+...
+```
+
+### What if a library isn't on DefinitelyType
+特定のライブラリにおいて node_modules/@types 配下に `d.ts` ファイルが存在しない場合は自分で`src` 配下に `d.ts` ファイルを作成する必要がある。
+
+#### Setting up TypeScript to look for .d.ts files in another folder
+`src` 配下に `d.ts` ファイルを作成したのちは `tsconfig.json` にパスを追記する必要がある。
+
+```JSON
+"baseUrl": ".",
+"paths": {
+    "*": [
+        "node_modules/*",
+        "src/types/*"
+    ]
+}
+```
+これで自作の `d.ts` ファイルが読み込まれるようになる。コンパイラ時の挙動としては、まず `node_modules/@types` 配下に`d.ts` ファイルが存在するかどうかを確認したのち、見つからなかった場合は `src/types/` 配下に`d.ts` ファイルが存在するかどうかを確認する。
+
+#### Using dts-gen
+
+`dts-gen` の参考文献
+https://www.npmjs.com/package/dts-gen
+
+```
+dts-gen is a tool that generates TypeScript definition files (.d.ts) from any JavaScript object.
+```
+
+#### Writing a .d.ts file
+とりあえず自作した`.d.ts` ファイルを使用して外部モジュールを読み込みたい場合はファイル内で以下を記述する。
+
+```TypeScript
+declare module "<some-library>";
+```
+安全なアプリケーションを作成するために`.d.ts` ファイルの作成について学びたい場合は以下を参照
+http://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html
+
+### Summary of .d.ts management
+`.d.ts` ファイルに関するベストプラクティスは以下の通りです。
+
+1. パッケージをインストールする場合に `.d.ts` ファイルを `@types` 経由でインストールできるかを試す
+2. パッケージに`.d.ts` ファイルが存在した場合は終了、しなかった場合は、3.に進む
+3. `.d.ts` ファイルを自作する自作する
+4. `dts-gen` コマンドで`.d.ts` ファイルを自動生成する
+5. 失敗した場合は`types`フォルダ配下に<some-library>.d.tsファイルを生成する
+6. 作成したファイルに以下を追記
+```
+declare module "<some-library>";
+```
+ここまでくればコンパイルは通るはず
+
+### Using the debugger in VS Code
+https://qiita.com/TsuyoshiUshio@github/items/9879ea04cdd606982a65
 
 
 
