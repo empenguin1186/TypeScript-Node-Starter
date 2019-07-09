@@ -143,11 +143,11 @@ declare module "<some-library>";
 http://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html
 
 ### Summary of .d.ts management
-`.d.ts` ファイルに関するベストプラクティスは以下の通りです。
+`.d.ts` ファイルに関するベストプラクティスは以下の通り。
 
 1. パッケージをインストールする場合に `.d.ts` ファイルを `@types` 経由でインストールできるかを試す
 2. パッケージに`.d.ts` ファイルが存在した場合は終了、しなかった場合は、3.に進む
-3. `.d.ts` ファイルを自作する自作する
+3. `.d.ts` ファイルを自作する
 4. `dts-gen` コマンドで`.d.ts` ファイルを自動生成する
 5. 失敗した場合は`types`フォルダ配下に<some-library>.d.tsファイルを生成する
 6. 作成したファイルに以下を追記
