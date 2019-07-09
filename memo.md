@@ -159,5 +159,19 @@ declare module "<some-library>";
 ### Using the debugger in VS Code
 https://qiita.com/TsuyoshiUshio@github/items/9879ea04cdd606982a65
 
+### ソースコードリーディングを通してわかったこと
+
+* express 公式サイト => https://expressjs.com/
+* src/views　配下にHTMLを配置している。テンプレートエンジンとしては.pugを採用しているみたい
+    * pugとは? => https://kumaweb-d.com/web/basics-of-pug/
+    * 他にどんなJSのテンプレートエンジンが存在する？ => https://www.granfairs.com/blog/cto/nunjucks1
+    * express で使用できるテンプレートエンジン => https://github.com/expressjs/express/wiki#template-engines
+    * ここでこのアプリケーションはpugを使用すると明記している => https://github.com/empenguin1186/TypeScript-Node-Starter/blob/master/src/app.ts#L44
+    * テンプレートエンジンの中でTSの変数を使用したい場合は、`render(<pugファイルの名前>, <変数定義>)` で使用する変数を定義し、テンプレートエンジン側では `#{変数}` という形式で使用する
+* ルーティングは https://github.com/empenguin1186/TypeScript-Node-Starter/blob/master/src/app.ts で行なっている
+* `res.render(te, {variable})` メソッドはテンプレートエンジンを用いてHTMLを描画するメソッドで、`res.redirect(path)`メソッドは指定されたパスに対応する処理(app.tsで定義されている)を行う。
+
+
+
 
 
