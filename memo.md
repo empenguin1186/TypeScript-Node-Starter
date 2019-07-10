@@ -171,6 +171,11 @@ https://qiita.com/TsuyoshiUshio@github/items/9879ea04cdd606982a65
 * ルーティングは https://github.com/empenguin1186/TypeScript-Node-Starter/blob/master/src/app.ts で行なっている
 * `res.render(te, {variable})` メソッドはテンプレートエンジンを用いてHTMLを描画するメソッドで、`res.redirect(path)`メソッドは指定されたパスに対応する処理(app.tsで定義されている)を行う。
 
+### python関連メモ
+https://qiita.com/yoyoyo_/items/56c6fcbd5a853460f506
+https://github.com/yoyoyo-yo/DeepLearningMugenKnock
+https://qiita.com/tani_AI_Academy/items/3edc5effeb386ae3caa9
+
 
 
 
