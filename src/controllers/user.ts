@@ -21,7 +21,6 @@ export const getLogin = (req: Request, res: Response) => {
     title: "Login"
   });
 };
-
 /**
  * POST /login
  * Sign in using email and password.

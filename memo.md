@@ -173,12 +173,63 @@ https://qiita.com/TsuyoshiUshio@github/items/9879ea04cdd606982a65
 * src/controller/contact.ts mailOptionsの型定義はどこに?
     * nodemailerライブラリが読み込んでいるMailライブラリの`.d.ts`ファイルに定義されている(node_modules/@types/nodemailer/lib/mailer/index.d.ts)
     * nodemailer公式: https://nodemailer.com/about/
+* `default export` について
+    * 参考文献: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/export
+    * 外部モジュールを読み込むときに単一の重要なものを読み込む時に使用する。
+    以下公式リファレンスより抜粋
+    
+    ```
+    エクスポート方法は、名前付きとデフォルトの 2 種類あります。名前付きエクスポートはモジュールごとに複数持てますが、デフォルトエクスポートは 1 つに限ります。それぞれのエクスポート方法は、上記の構文のひとつに対応します:
+    ```
+
+    ```
+    名前付きエクスポートは、さまざまな値をエクスポートするのに役立ちます。インポートするときに、対応するオブジェクトと同じ名前を使用しなければなりません。
+
+    一方、デフォルトエクスポートは以下のように任意の名前を使用できます:
+    ```
+
+    例) クラスモジュール(user_commonjs.ts)
+    ```TypeScript
+    export default class {
+    constructor(private _name: string, private _age: number) {
+
+        }
+        get name(): string {
+            return this._name;
+        }
+        get age(): number {
+            return this._age;
+        }
+        set name(name: string) {
+            this._name = name;
+        }
+        set age(age: number) {
+            this._age = age;
+        }
+
+    }
+    ```
+    default exportではクラス名を持たせないこともできる
+
+    使用する側
+    ```TypeScript
+    import Hoge from './user_commonjs';
+
+    var user = new Hoge("empenguin1186", 26);
+    console.log(user.age);
+    ```
+
+    【結論】
+    * 名前付きexport はモジュールごとに複数持つことが可能であるが、呼び出し側で使用する時にはモジュールファイルで定義されたメンバの名前を指定する必要がある
+    * default export はモジュールごとに1つしか持つことはできないが、呼び出し側で使用する時は指定する名前は自由に決めて良い
 
 ### VS Code のショートカットについて
 * cmd + P でエディタで開いている別のファイルにジャンプする
 * F12 で定義元にジャンプ
 * Ctl + 「-」で前編集した箇所に移動 
 * key-bind 公式：https://code.visualstudio.com/docs/getstarted/keybindings
+* cmd + k, sでインストールされているVS Codeのショートカットが表示される
+    * 検索はkey-bind公式に記載されている名前を使用して行うことができる
 
 
 ### python関連メモ
@@ -186,6 +237,8 @@ https://qiita.com/yoyoyo_/items/56c6fcbd5a853460f506
 https://github.com/yoyoyo-yo/DeepLearningMugenKnock
 https://qiita.com/tani_AI_Academy/items/3edc5effeb386ae3caa9
 
+### MDN
+https://developer.mozilla.org/ja/
 
 
 
