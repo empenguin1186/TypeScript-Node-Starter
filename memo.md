@@ -168,8 +168,18 @@ https://qiita.com/TsuyoshiUshio@github/items/9879ea04cdd606982a65
     * express で使用できるテンプレートエンジン => https://github.com/expressjs/express/wiki#template-engines
     * ここでこのアプリケーションはpugを使用すると明記している => https://github.com/empenguin1186/TypeScript-Node-Starter/blob/master/src/app.ts#L44
     * テンプレートエンジンの中でTSの変数を使用したい場合は、`render(<pugファイルの名前>, <変数定義>)` で使用する変数を定義し、テンプレートエンジン側では `#{変数}` という形式で使用する
-* ルーティングは https://github.com/empenguin1186/TypeScript-Node-Starter/blob/master/src/app.ts で行なっている
+* ルーティングは https://github.com/empenguin1186/TypeScript-Node-Starter/blob/master/src/app.ts で行なっている]
 * `res.render(te, {variable})` メソッドはテンプレートエンジンを用いてHTMLを描画するメソッドで、`res.redirect(path)`メソッドは指定されたパスに対応する処理(app.tsで定義されている)を行う。
+* src/controller/contact.ts mailOptionsの型定義はどこに?
+    * nodemailerライブラリが読み込んでいるMailライブラリの`.d.ts`ファイルに定義されている(node_modules/@types/nodemailer/lib/mailer/index.d.ts)
+    * nodemailer公式: https://nodemailer.com/about/
+
+### VS Code のショートカットについて
+* cmd + P でエディタで開いている別のファイルにジャンプする
+* F12 で定義元にジャンプ
+* Ctl + 「-」で前編集した箇所に移動 
+* key-bind 公式：https://code.visualstudio.com/docs/getstarted/keybindings
+
 
 ### python関連メモ
 https://qiita.com/yoyoyo_/items/56c6fcbd5a853460f506
