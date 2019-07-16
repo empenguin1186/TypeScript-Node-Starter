@@ -236,6 +236,7 @@ https://qiita.com/tani_AI_Academy/items/3edc5effeb386ae3caa9
 ### MDN
 https://developer.mozilla.org/ja/
 
-
-
-
+### 取得しようと思った資格
+* HTML5プロフェッショナル認定試験 https://html5exam.jp/merit/
+* Java Silver 
+* 基本情報処理技術者試験
