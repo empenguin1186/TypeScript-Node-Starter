@@ -218,6 +218,21 @@ https://qiita.com/TsuyoshiUshio@github/items/9879ea04cdd606982a65
     【結論】
     * 名前付きexport はモジュールごとに複数持つことが可能であるが、呼び出し側で使用する時にはモジュールファイルで定義されたメンバの名前を指定する必要がある
     * default export はモジュールごとに1つしか持つことはできないが、呼び出し側で使用する時は指定する名前は自由に決めて良い
+* ユーザが認証済みかの判断はExpressの認証ミドルウェアであるPassportを使用している。よく`app.ts`では`app.get(<URI>, passportConfig.isAuthenticated, <Controller Method>);`という表記が見られるが、これは`Controller Method`が実行される前にユーザが認証を済ましているかどうかを`isAuthenticated`で確認している
+
+passport.ts
+```
+/**
+ * Login Required middleware.
+ */
+export const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+};
+```
+認証が済んでいない場合は`/login`にリダイレクトされる
 
 ### VS Code のショートカットについて
 * cmd + P でエディタで開いている別のファイルにジャンプする
