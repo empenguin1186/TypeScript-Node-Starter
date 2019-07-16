@@ -161,63 +161,69 @@ https://qiita.com/TsuyoshiUshio@github/items/9879ea04cdd606982a65
 
 ### ソースコードリーディングを通してわかったこと
 
-* express 公式サイト => https://expressjs.com/
+#### express 公式サイト
+    https://expressjs.com/
+
+#### HTMLファイル配置場所
 * src/views　配下にHTMLを配置している。テンプレートエンジンとしては.pugを採用しているみたい
     * pugとは? => https://kumaweb-d.com/web/basics-of-pug/
     * 他にどんなJSのテンプレートエンジンが存在する？ => https://www.granfairs.com/blog/cto/nunjucks1
     * express で使用できるテンプレートエンジン => https://github.com/expressjs/express/wiki#template-engines
     * ここでこのアプリケーションはpugを使用すると明記している => https://github.com/empenguin1186/TypeScript-Node-Starter/blob/master/src/app.ts#L44
     * テンプレートエンジンの中でTSの変数を使用したい場合は、`render(<pugファイルの名前>, <変数定義>)` で使用する変数を定義し、テンプレートエンジン側では `#{変数}` という形式で使用する
-* ルーティングは https://github.com/empenguin1186/TypeScript-Node-Starter/blob/master/src/app.ts で行なっている]
+#### ルーティング
+* https://github.com/empenguin1186/TypeScript-Node-Starter/blob/master/src/app.ts で行なっている
 * `res.render(te, {variable})` メソッドはテンプレートエンジンを用いてHTMLを描画するメソッドで、`res.redirect(path)`メソッドは指定されたパスに対応する処理(app.tsで定義されている)を行う。
-* src/controller/contact.ts mailOptionsの型定義はどこに?
-    * nodemailerライブラリが読み込んでいるMailライブラリの`.d.ts`ファイルに定義されている(node_modules/@types/nodemailer/lib/mailer/index.d.ts)
-    * nodemailer公式: https://nodemailer.com/about/
-* `default export` について
-    * 参考文献: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/export
-    * 外部モジュールを読み込むときに単一の重要なものを読み込む時に使用する。
-    以下公式リファレンスより抜粋
-    
-    
-    > エクスポート方法は、名前付きとデフォルトの 2 種類あります。名前付きエクスポートはモジュールごとに複数持てますが、デフォルトエクスポートは 1 つに限ります。それぞれのエクスポート方法は、上記の構文のひとつに対応します:
 
-    > 名前付きエクスポートは、さまざまな値をエクスポートするのに役立ちます。インポートするときに、対応するオブジェクトと同じ名前を使用しなければなりません。
-    > 一方、デフォルトエクスポートは以下のように任意の名前を使用できます:
+#### src/controller/contact.ts mailOptionsの型定義はどこに?
+* nodemailerライブラリが読み込んでいるMailライブラリの`.d.ts`ファイルに定義されている(node_modules/@types/nodemailer/lib/mailer/index.d.ts)
+* nodemailer公式: https://nodemailer.com/about/
+#### `default export` について
+* 参考文献: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/export
+* 外部モジュールを読み込むときに単一の重要なものを読み込む時に使用する。
+以下公式リファレンスより抜粋
 
-    例) クラスモジュール(user_commonjs.ts)
-    ```TypeScript
-    export default class {
-    constructor(private _name: string, private _age: number) {
 
-        }
-        get name(): string {
-            return this._name;
-        }
-        get age(): number {
-            return this._age;
-        }
-        set name(name: string) {
-            this._name = name;
-        }
-        set age(age: number) {
-            this._age = age;
-        }
+> エクスポート方法は、名前付きとデフォルトの 2 種類あります。名前付きエクスポートはモジュールごとに複数持てますが、デフォルトエクスポートは 1 つに限ります。それぞれのエクスポート方法は、上記の構文のひとつに対応します  
+> 名前付きエクスポートは、さまざまな値をエクスポートするのに役立ちます。インポートするときに、対応するオブジェクトと同じ名前を使用しなければなりません。
+> 一方、デフォルトエクスポートは以下のように任意の名前を使用できます:
+
+例) クラスモジュール(user_commonjs.ts)
+```TypeScript
+export default class {
+constructor(private _name: string, private _age: number) {
 
     }
-    ```
-    default exportではクラス名を持たせないこともできる
+    get name(): string {
+        return this._name;
+    }
+    get age(): number {
+        return this._age;
+    }
+    set name(name: string) {
+        this._name = name;
+    }
+    set age(age: number) {
+        this._age = age;
+    }
 
-    使用する側
-    ```TypeScript
-    import Hoge from './user_commonjs';
+}
+```
+default exportではクラス名を持たせないこともできる
 
-    var user = new Hoge("empenguin1186", 26);
-    console.log(user.age);
-    ```
+使用する側
+```TypeScript
+import Hoge from './user_commonjs';
 
-    【結論】
-    * 名前付きexport はモジュールごとに複数持つことが可能であるが、呼び出し側で使用する時にはモジュールファイルで定義されたメンバの名前を指定する必要がある
-    * default export はモジュールごとに1つしか持つことはできないが、呼び出し側で使用する時は指定する名前は自由に決めて良い
+var user = new Hoge("empenguin1186", 26);
+console.log(user.age);
+```
+
+【結論】
+* 名前付きexport はモジュールごとに複数持つことが可能であるが、呼び出し側で使用する時にはモジュールファイルで定義されたメンバの名前を指定する必要がある
+* default export はモジュールごとに1つしか持つことはできないが、呼び出し側で使用する時は指定する名前は自由に決めて良い
+
+#### 認証周り
 * ユーザが認証済みかの判断はExpressの認証ミドルウェアであるPassportを使用している。よく`app.ts`では`app.get(<URI>, passportConfig.isAuthenticated, <Controller Method>);`という表記が見られるが、これは`Controller Method`が実行される前にユーザが認証を済ましているかどうかを`isAuthenticated`で確認している
 
 passport.ts
@@ -233,6 +239,17 @@ export const isAuthenticated = (req: Request, res: Response, next: NextFunction)
 };
 ```
 認証が済んでいない場合は`/login`にリダイレクトされる
+
+#### Jadeのincludeとextendsとmixinについて
+
+|要素| 説明 |
+|:----------:|---------------------------------------------------------|
+|include|フッタなどのそれぞれのWebページで共通のファイルを扱う場合に使用。| 
+|extends|テンプレートとなるファイルを用意しておいて、各ページで独自のデータを扱うときはテンプレートのBlockという要素に埋め込んで使用する。|
+|mixin|共通のファイルを使いたいけど、各ページによって処理を少しだけ変更したいときに使う|
+
+【参考文献】　　
+- https://necosystem.hirokihomma.com/archives/121/  
 
 ### VS Code のショートカットについて
 * cmd + P でエディタで開いている別のファイルにジャンプする
