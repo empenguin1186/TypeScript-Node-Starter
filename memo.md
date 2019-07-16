@@ -221,7 +221,7 @@ https://qiita.com/TsuyoshiUshio@github/items/9879ea04cdd606982a65
 * ユーザが認証済みかの判断はExpressの認証ミドルウェアであるPassportを使用している。よく`app.ts`では`app.get(<URI>, passportConfig.isAuthenticated, <Controller Method>);`という表記が見られるが、これは`Controller Method`が実行される前にユーザが認証を済ましているかどうかを`isAuthenticated`で確認している
 
 passport.ts
-```
+```TypeScript
 /**
  * Login Required middleware.
  */
