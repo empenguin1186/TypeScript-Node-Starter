@@ -240,6 +240,33 @@ export const isAuthenticated = (req: Request, res: Response, next: NextFunction)
 ```
 認証が済んでいない場合は`/login`にリダイレクトされる
 
+#### package-lock.json について
+* `package-lock.json`は利用するライブラリのバージョンを固定するためのファイルである
+【参考文献】
+* https://tsuyopon.xyz/2019/02/11/what-is-the-package-lock-json/
+
+`package.json`にもバージョンが指定してあるように思われるが、必ずしも記述されたのと同じバージョンがインストールされるとは限らない。例えば、以下のような記述を考える
+
+package.json
+```JSON
+"dependencies": {
+    "async": "^3.0.1",
+    "bcrypt-nodejs": "^0.0.3",
+    "bluebird": "^3.5.5",
+    "body-parser": "^1.19.0",
+```
+一見すると`async`ライブラリは`3.0.1`がインストールされるように見えるが、実際にインストールされるバージョンは、メジャーバージョンのみ合致したものがインストールされる場合がある。したがって、ライブラリのアップデータが行われて`3.0.2`となった場合に`npm install`を実行すると`3.0.2`がインストールされて、複数人で開発を行なっている場合はそれぞれでしようしているライブラリのバージョンが異なる事態が発生する。  
+しかし、`package-lock.json`を使用すると、バージョンの固定が行われるのでそういった自体は防ぐことができる。
+
+package-lock.json
+```JSON
+"async": {
+      "version": "3.0.1",
+      "resolved": "https://registry.npmjs.org/async/-/async-3.0.1.tgz",
+      "integrity": "sha512-ZswD8vwPtmBZzbn9xyi8XBQWXH3AvOQ43Za1KWYq7JeycrZuUYzx01KvHcVbXltjqH4y0MWrQ33008uLTqXuDw=="
+    },
+```
+
 #### Jadeのincludeとextendsとmixinについて
 
 |要素| 説明 |
