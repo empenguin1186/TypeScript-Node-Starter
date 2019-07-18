@@ -25,7 +25,7 @@ https://developer.mozilla.org/ja/docs/Tools/Debugger/How_to/Use_a_source_map
 
 
 ### Running the build
-ビルドコマンドは`npm`コマンドを使用する。なお、package.jsonの`script`タグで実行するビルドコマンドのエイリアスを設定することが可能。
+ビルドコマンドは`npm`コマンドを使用する。なお、package.jsonの`script`タグで実行するビルドコマンドのAliasを設定することが可能。
 
 ```JSON
 "scripts": {
@@ -129,9 +129,7 @@ export interface AsyncQueue<T> {
 `dts-gen` の参考文献
 https://www.npmjs.com/package/dts-gen
 
-```
-dts-gen is a tool that generates TypeScript definition files (.d.ts) from any JavaScript object.
-```
+> dts-gen is a tool that generates TypeScript definition files (.d.ts) from any JavaScript object.
 
 #### Writing a .d.ts file
 とりあえず自作した`.d.ts` ファイルを使用して外部モジュールを読み込みたい場合はファイル内で以下を記述する。
@@ -162,7 +160,10 @@ https://qiita.com/TsuyoshiUshio@github/items/9879ea04cdd606982a65
 ### ソースコードリーディングを通してわかったこと
 
 #### express 公式サイト
-    https://expressjs.com/
+https://expressjs.com/  
+
+【日本語ドキュメント】  
+http://hideyukisaito.github.io/expressjs-doc_ja/guide/
 
 #### HTMLファイル配置場所
 * src/views　配下にHTMLを配置している。テンプレートエンジンとしては.pugを採用しているみたい
@@ -224,7 +225,7 @@ console.log(user.age);
 * default export はモジュールごとに1つしか持つことはできないが、呼び出し側で使用する時は指定する名前は自由に決めて良い
 
 #### 認証周り
-* ユーザが認証済みかの判断はExpressの認証ミドルウェアであるPassportを使用している。よく`app.ts`では`app.get(<URI>, passportConfig.isAuthenticated, <Controller Method>);`という表記が見られるが、これは`Controller Method`が実行される前にユーザが認証を済ましているかどうかを`isAuthenticated`で確認している
+* ユーザが認証済みかの判断はExpressの認証ミドルウェアであるPassport(※)を使用している。よく`app.ts`では`app.get(<URI>, passportConfig.isAuthenticated, <Controller Method>);`という表記が見られるが、これは`Controller Method`が実行される前にユーザが認証を済ましているかどうかを`isAuthenticated`で確認している
 
 passport.ts
 ```TypeScript
@@ -239,6 +240,19 @@ export const isAuthenticated = (req: Request, res: Response, next: NextFunction)
 };
 ```
 認証が済んでいない場合は`/login`にリダイレクトされる
+
+※　Passportについて
+上記の通りPassportとはNode.jsで扱う認証機能を提供するミドルウェアのことを指す  
+公式サイト: https://knimon-software.github.io/www.passportjs.org/
+
+以下公式サイトから引用  
+> PassportとはNode.jsのための認証機能を提供するミドルウェアです。 ExpressベースのWebアプリケーションで簡単かつ柔軟に利用でき、使いどころを選びません。 Facebookやtwitter、または通常のユーザID/パスワード認証など、多彩なサービスの認証に対応しています。  
+
+また、Passportを利用したAuth0という認証システムも存在する  
+公式サイト: https://auth0.com/docs  
+
+#### req.flashについて
+このメソッドはフラッシュメッセージ表示するメソッド
 
 #### package-lock.json について
 * `package-lock.json`は利用するライブラリのバージョンを固定するためのファイルである
