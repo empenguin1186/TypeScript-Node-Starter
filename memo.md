@@ -322,3 +322,6 @@ https://developer.mozilla.org/ja/
 * HTML5プロフェッショナル認定試験 https://html5exam.jp/merit/
 * Java Silver 
 * 基本情報処理技術者試験
+
+### 学習をする上での参考サイト
+https://recruit-tech.co.jp/blog/2019/07/02/rtech_bootcamp_2019/
