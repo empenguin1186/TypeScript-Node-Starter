@@ -292,6 +292,15 @@ package-lock.json
 【参考文献】　　
 - https://necosystem.hirokihomma.com/archives/121/  
 
+#### 使用されているテストフレームワークについて
+##### Jest
+一般的なテストフレームワーク  
+公式ドキュメント：https://jestjs.io/ja/  
+
+##### supertest
+API テストを実行するためのライブラリ
+公式ドキュメント：https://github.com/visionmedia/superagent
+
 ### VS Code のショートカットについて
 * cmd + P でエディタで開いている別のファイルにジャンプする
 * F12 で定義元にジャンプ
