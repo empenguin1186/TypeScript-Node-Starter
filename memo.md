@@ -298,7 +298,7 @@ package-lock.json
 公式ドキュメント：https://jestjs.io/ja/  
 
 ##### supertest
-API テストを実行するためのライブラリ
+API テストを実行するためのライブラリ  
 公式ドキュメント：https://github.com/visionmedia/superagent
 
 ### VS Code のショートカットについて
